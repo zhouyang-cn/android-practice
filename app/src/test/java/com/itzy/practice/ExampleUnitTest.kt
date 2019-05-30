@@ -1,4 +1,4 @@
-package com.itzhouyang.android.practice
+package com.itzy.practice
 
 import org.junit.Test
 

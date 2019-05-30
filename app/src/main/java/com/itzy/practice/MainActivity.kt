@@ -1,4 +1,4 @@
-package com.itzhouyang.android.practice
+package com.itzy.practice
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
