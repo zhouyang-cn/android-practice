@@ -1,10 +1,13 @@
 package com.itzy.practice.widget
 
 import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.sp
 
@@ -16,6 +19,7 @@ class DashboardView @JvmOverloads constructor(
 ) :
     View(context, attrs, defStyleAttr) {
 
+    private val mPointerPath = Path()
     private var mHeight: Int = 0
     private var mWidth: Int = 0
     private val mDefaultWidth = dip(300)
@@ -38,6 +42,7 @@ class DashboardView @JvmOverloads constructor(
     private val mOuterDesPaint = Paint()
     private val mScorePaint = Paint()
     private val mScoreUnitPaint = Paint()
+    private val mPointerPaint = Paint()
 
     private val mArgbEvaluator = ArgbEvaluator()
     private val mStartColor = Color.parseColor("#3DBC9B")
@@ -64,9 +69,16 @@ class DashboardView @JvmOverloads constructor(
     private val mDesColor5 = Color.parseColor("#FF4747")
     private val mDesPoint5 = PointF()
 
-    private var score = 35
+    private var score = 0
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     init {
+        // mStartColor在180°位置（0.5f）
+        // mMiddleColor在270°位置（0.75f）
+        // mEndColor在360°位置（1.0f）
         val sweepGradient = SweepGradient(
             0f,
             0f,
@@ -76,17 +88,17 @@ class DashboardView @JvmOverloads constructor(
         mGradientPaint.apply {
             isAntiAlias = true
             shader = sweepGradient
-            strokeWidth = 7.0f
+            strokeWidth = dip(2).toFloat()
             style = Paint.Style.STROKE
         }
         mScaleLinePaint.apply {
             isAntiAlias = true
             color = Color.BLACK
-            strokeWidth = 5.0f
+            strokeWidth = dip(1.2f).toFloat()
         }
         mOuterDesPaint.apply {
             isAntiAlias = true
-            textSize = sp(10).toFloat()
+            textSize = sp(12).toFloat()
         }
         mScorePaint.apply {
             isAntiAlias = true
@@ -95,6 +107,10 @@ class DashboardView @JvmOverloads constructor(
         mScoreUnitPaint.apply {
             isAntiAlias = true
             textSize = sp(16).toFloat()
+        }
+        mPointerPaint.apply {
+            isAntiAlias = true
+            color = Color.parseColor("#111111")
         }
     }
 
@@ -112,7 +128,12 @@ class DashboardView @JvmOverloads constructor(
         } else {
             mDefaultHeight
         }
+        if (mWidth < mDefaultWidth) {
+            // 限制最小宽度为300dp，小于这个尺寸，view将无法展示完全
+            mWidth = mDefaultWidth
+        }
         if (mWidth != mHeight * 2) {
+            // view上有多个半圆，需要保持宽：高 = 2:1
             mHeight = mWidth / 2
         }
         setMeasuredDimension(mWidth, mHeight)
@@ -123,6 +144,17 @@ class DashboardView @JvmOverloads constructor(
         super.onSizeChanged(w, h, oldw, oldh)
         initRectF()
         initOuterDesText()
+        initPointer()
+    }
+
+    private fun initPointer() {
+        mPointerPath.apply {
+            moveTo(0.0f, dip(10).toFloat())
+            lineTo(mWidth * -0.27f, dip(1.2f).toFloat())
+            lineTo(mWidth * -0.27f, dip(-1.2f).toFloat())
+            lineTo(0.0f, dip(-10).toFloat())
+            close()
+        }
     }
 
     private fun initRectF() {
@@ -151,10 +183,19 @@ class DashboardView @JvmOverloads constructor(
         super.onDraw(canvas)
         drawOuterArc(canvas)
         drawMiddleArc(canvas)
-        drawInnerArc(canvas)
         drawScaleLine(canvas)
         drawOuterDesText(canvas)
+        drawPointer(canvas)
+        drawInnerArc(canvas)
         drawScoreText(canvas)
+    }
+
+
+    /**
+     * 移动画布到View的 “中心” 位置（width/2，height）
+     */
+    private fun Canvas.move2Center() {
+        translate(mWidth * 0.5f, mHeight.toFloat())
     }
 
     /**
@@ -163,7 +204,7 @@ class DashboardView @JvmOverloads constructor(
     private fun drawOuterArc(canvas: Canvas) {
         canvas.apply {
             save()
-            translate(mWidth * 0.5f, mHeight.toFloat())
+            move2Center()
             drawArc(mOuterArcRect, 180f, 180f, false, mOuterArcPaint)
             restore()
         }
@@ -175,7 +216,7 @@ class DashboardView @JvmOverloads constructor(
     private fun drawMiddleArc(canvas: Canvas) {
         canvas.apply {
             save()
-            translate(mWidth * 0.5f, mHeight.toFloat())
+            move2Center()
             drawArc(mMiddleArcRect, 180f, 180f, false, mGradientPaint)
             restore()
         }
@@ -187,7 +228,7 @@ class DashboardView @JvmOverloads constructor(
     private fun drawInnerArc(canvas: Canvas) {
         canvas.apply {
             save()
-            translate(mWidth * 0.5f, mHeight.toFloat())
+            move2Center()
             drawArc(mInnerArcRect, 180f, 180f, false, mInnerArcPaint)
             restore()
         }
@@ -200,12 +241,12 @@ class DashboardView @JvmOverloads constructor(
         val startX = mWidth * 0.3f
         val startX2 = mWidth * 0.285f
         val stopX = mWidth * 0.33f
-        val stopX2 = mWidth * 0.355f
+        val stopX2 = mWidth * 0.345f
         val startY = 0.0f
         val stopY = 0.0f
         canvas.apply {
             save()
-            translate(mWidth * 0.5f, mHeight.toFloat())
+            move2Center()
             rotate(180.0f)
             for (degrees in 0..50) {
                 if (degrees < 26) {
@@ -264,7 +305,7 @@ class DashboardView @JvmOverloads constructor(
         val scoreUnitX = scoreWidth * (1 + xOffset)
         canvas.apply {
             save()
-            translate(mWidth * 0.5f, mHeight.toFloat())
+            move2Center()
             drawText(scoreText, scoreX, y, mScorePaint)
             drawText(scoreUnitText, scoreUnitX, y, mScoreUnitPaint)
             restore()
@@ -312,7 +353,7 @@ class DashboardView @JvmOverloads constructor(
     private fun drawOuterDesText(canvas: Canvas) {
         canvas.apply {
             save()
-            translate(mWidth * 0.5f, mHeight.toFloat())
+            move2Center()
             mOuterDesPaint.color = mDesColor1
             drawText(mDesStr1, mDesPoint1.x, mDesPoint1.y, mOuterDesPaint)
 
@@ -329,6 +370,25 @@ class DashboardView @JvmOverloads constructor(
             drawText(mDesStr5, mDesPoint5.x, mDesPoint5.y, mOuterDesPaint)
             restore()
         }
+    }
+
+    private fun drawPointer(canvas: Canvas) {
+        canvas.apply {
+            save()
+            move2Center()
+            rotate(score.toFloat() * 0.01f * 180)
+            drawPath(mPointerPath, mPointerPaint)
+            restore()
+        }
+    }
+
+    fun startAnimator(score: Int) {
+        if (score < 1 || score > 100) {
+            return
+        }
+        val animator = ObjectAnimator.ofInt(this, "score", 0, score)
+            .setDuration(1200)
+        animator.start()
     }
 
 
