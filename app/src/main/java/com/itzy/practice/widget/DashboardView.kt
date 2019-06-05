@@ -6,18 +6,17 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.LinearInterpolator
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.sp
 
-
+/**
+ * 仪表盘
+ */
 class DashboardView @JvmOverloads constructor(
     context: Context?,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) :
-    View(context, attrs, defStyleAttr) {
+) : View(context, attrs, defStyleAttr) {
 
     private val mPointerPath = Path()
     private var mHeight: Int = 0
