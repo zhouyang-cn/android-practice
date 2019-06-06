@@ -346,7 +346,7 @@ class DashboardView @JvmOverloads constructor(
         }
     }
 
-    fun startAnimator(score: Int) {
+    fun setScoreValue(score: Int) {
         if (score < 1 || score > 100) {
             return
         }

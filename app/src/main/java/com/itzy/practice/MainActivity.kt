@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener {
-            dashboardView.startAnimator(75)
-            barChartView.startAnimator(50)
+            dashboardView.setScoreValue(75)
+            barChartView.setData(100)
         }
 
         val toggle = ActionBarDrawerToggle(

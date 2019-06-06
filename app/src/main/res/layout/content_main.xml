@@ -19,9 +19,10 @@
     <com.itzy.practice.widget.BarChatView
         android:id="@+id/barChartView"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:paddingBottom="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dashboardView"/>

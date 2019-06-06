@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
 import org.jetbrains.anko.dip
@@ -20,6 +21,7 @@ class BarChatView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
 
+    private var mBarWidth: Float = 0f
     private var barHeight = 0
         set(value) {
             field = value
@@ -28,6 +30,8 @@ class BarChatView @JvmOverloads constructor(
 
     private val greenColor = Color.parseColor("#3DBC9B")
     private val redColor = Color.parseColor("#FF4747")
+
+    private val bottomOffset = dip(5).toFloat()
 
     private val mGreenTextPaint = Paint().apply {
         isAntiAlias = true
@@ -38,8 +42,6 @@ class BarChatView @JvmOverloads constructor(
     private val mGreenBarPaint = Paint().apply {
         isAntiAlias = true
         color = greenColor
-        strokeWidth = dip(50).toFloat()
-
     }
 
     private val mRedTextPaint = Paint().apply {
@@ -51,36 +53,134 @@ class BarChatView @JvmOverloads constructor(
     private val mRedBarPaint = Paint().apply {
         isAntiAlias = true
         color = redColor
-        strokeWidth = dip(1).toFloat()
+    }
 
+    // 底部下跌和上涨文字高度
+    private var dropTextHeight = 0f
+
+    private var mDropPath = Path()
+    private var mRisePath = Path()
+    private var dropWidth = dip(16).toFloat()
+        set(value) {
+            field = value
+            invalidate()
+        }
+    private var riseWidth = dip(16).toFloat()
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    private var horizontalBarBottomY = 0f
+    private var horizontalBarTopY = 0f
+    private val data = listOf(5, 10, 15, 20, 60, 18, 10, 2)
+
+    private var barBottomY = 0f
+
+    private val rangTextList = listOf(
+        "<-10", "-10~-7", "-7~-3", "-3~-0",
+        "0~3", "3~7", "7~10", ">10"
+    )
+    private var total = 0
+    private var dropTotal = 0
+    private var riseTotal = 0
+
+    init {
+        dropTextHeight = mGreenTextPaint.fontMetrics.bottom - mGreenTextPaint.fontMetrics.top
+        horizontalBarBottomY = (bottomOffset + dropTextHeight + dip(5)) * -1f
+        horizontalBarTopY = horizontalBarBottomY - dip(8)
+
+        barBottomY = horizontalBarTopY - dip(30)
+
+        for ((index, value) in data.withIndex()) {
+            total += value
+            if (index < 4) {
+                dropTotal += value
+            } else {
+                riseTotal += value
+            }
+        }
+    }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        initBarWidth()
+    }
+
+    private fun initBarWidth() {
+        // 一共8个柱，start和end不要间距，相邻两个柱的间距为15dp
+        mBarWidth = (width - 7 * dip(15)) / 8f
+        mGreenBarPaint.strokeWidth = mBarWidth
+        mRedBarPaint.strokeWidth = mBarWidth
+
+        dropWidth = width / 2f
+        riseWidth = width / 2f
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas.apply {
+        with(canvas) {
             save()
             move2Bottom()
-            drawBar(this)
             drawDropAndRiseAmount(this)
+            drawHorizontalBar(this)
+            drawBar(this)
             restore()
         }
     }
 
     private fun drawDropAndRiseAmount(canvas: Canvas) {
-        val dropAmount = "下跌: 3199"
-        val riseAmount = "上涨: 2199"
-        val textWidth = mRedTextPaint.measureText(riseAmount)
-        canvas.apply {
-            drawText(dropAmount, 0f, -10f, mGreenTextPaint)
-            drawText(riseAmount, width - textWidth, -10f, mRedTextPaint)
+        val dropAmount = "下跌: $dropTotal"
+        val riseAmount = "上涨: $riseTotal"
+        val textWidth = mGreenTextPaint.measureText(riseAmount)
+        with(canvas) {
+            drawText(dropAmount, 0f, -bottomOffset, mGreenTextPaint)
+            drawText(riseAmount, width - textWidth, -bottomOffset, mRedTextPaint)
         }
     }
 
-    private fun drawBar(canvas: Canvas) {
-        canvas.apply {
-            drawLine(0f, 0f, 0f, dip(-1 * barHeight).toFloat(), mGreenBarPaint)
-            drawLine(0f, 0f, 0f, dip(-1 * barHeight).toFloat(), mRedBarPaint)
+    /**
+     * 绘制下跌和上涨横条
+     */
+    private fun drawHorizontalBar(canvas: Canvas) {
+        mDropPath.apply {
+            // 清空上次绘制用的path
+            reset()
+            moveTo(0f, horizontalBarBottomY)
+            lineTo(0f, horizontalBarTopY)
+            lineTo(dropWidth, horizontalBarTopY)
+            lineTo(dropWidth - dip(8), horizontalBarBottomY)
+            close()
         }
+        mRisePath.apply {
+            // 清空上次绘制用的path
+            reset()
+            moveTo(width.toFloat(), horizontalBarBottomY)
+            lineTo(width.toFloat(), horizontalBarTopY)
+            lineTo(width - riseWidth + dip(8), horizontalBarTopY)
+            lineTo(width - riseWidth, horizontalBarBottomY)
+            close()
+        }
+        canvas.drawPath(mDropPath, mGreenBarPaint)
+        canvas.drawPath(mRisePath, mRedBarPaint)
+    }
+
+    private fun drawBar(canvas: Canvas) {
+        for ((index, value) in data.withIndex()) {
+            val x = if (index != 0) {
+                (mBarWidth + dip(15)) * index + mBarWidth / 2
+            } else {
+                mBarWidth / 2
+            }
+            canvas.drawLine(
+                x,
+                barBottomY,
+                x,
+                -1 * barHeight + barBottomY,
+                if (index < 4) mGreenBarPaint else mRedBarPaint
+            )
+        }
+
     }
 
     /**
@@ -90,9 +190,33 @@ class BarChatView @JvmOverloads constructor(
         translate(0f, height.toFloat())
     }
 
-    fun startAnimator(height: Int) {
-        val animator = ObjectAnimator.ofInt(this, "barHeight", 0, height)
-            .setDuration(1200)
+    fun setData(barHeight: Int) {
+        val animator = ObjectAnimator.ofInt(
+            this,
+            "barHeight",
+            0,
+            barHeight
+        ).setDuration(1200)
         animator.start()
+        val dropWidth = width * (dropTotal.toFloat() / total)
+        println("=== total = $total")
+        println("=== dropTotal = $dropTotal")
+        println("=== dropWidth = $dropWidth")
+        val animatorDropBar = ObjectAnimator.ofFloat(
+            this,
+            "dropWidth",
+            width / 2f,
+            dropWidth
+        ).setDuration(1200)
+        animatorDropBar.start()
+        val riseWidth = width - dropWidth
+        println("=== riseWidth = $riseWidth")
+        val animatorRiseBar = ObjectAnimator.ofFloat(
+            this,
+            "riseWidth",
+            width / 2f,
+            riseWidth
+        ).setDuration(1200)
+        animatorRiseBar.start()
     }
 }
