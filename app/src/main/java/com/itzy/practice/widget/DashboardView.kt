@@ -180,13 +180,22 @@ class DashboardView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        drawOuterArc(canvas)
-        drawMiddleArc(canvas)
-        drawScaleLine(canvas)
-        drawOuterDesText(canvas)
-        drawPointer(canvas)
-        drawInnerArc(canvas)
-        drawScoreText(canvas)
+        with(canvas){
+            save()
+            move2Center()
+            // 绘制外部灰色半圆
+            drawArc(mOuterArcRect, 180f, 180f, false, mOuterArcPaint)
+            // 绘制中间渐变色弧线
+            drawArc(mMiddleArcRect, 180f, 180f, false, mGradientPaint)
+
+            drawScaleLine(this)
+            drawOuterDesText(this)
+            drawPointer(this)
+            // 绘制内部白色半圆
+            drawArc(mInnerArcRect, 180f, 180f, false, mInnerArcPaint)
+            drawScoreText(this)
+            restore()
+        }
     }
 
 
@@ -195,42 +204,6 @@ class DashboardView @JvmOverloads constructor(
      */
     private fun Canvas.move2Center() {
         translate(mWidth * 0.5f, mHeight.toFloat())
-    }
-
-    /**
-     * 绘制外部灰色半圆
-     */
-    private fun drawOuterArc(canvas: Canvas) {
-        canvas.apply {
-            save()
-            move2Center()
-            drawArc(mOuterArcRect, 180f, 180f, false, mOuterArcPaint)
-            restore()
-        }
-    }
-
-    /**
-     * 绘制中间渐变色弧线
-     */
-    private fun drawMiddleArc(canvas: Canvas) {
-        canvas.apply {
-            save()
-            move2Center()
-            drawArc(mMiddleArcRect, 180f, 180f, false, mGradientPaint)
-            restore()
-        }
-    }
-
-    /**
-     * 绘制内部白色半圆
-     */
-    private fun drawInnerArc(canvas: Canvas) {
-        canvas.apply {
-            save()
-            move2Center()
-            drawArc(mInnerArcRect, 180f, 180f, false, mInnerArcPaint)
-            restore()
-        }
     }
 
     /**
@@ -243,9 +216,8 @@ class DashboardView @JvmOverloads constructor(
         val stopX2 = mWidth * 0.345f
         val startY = 0.0f
         val stopY = 0.0f
-        canvas.apply {
+        with(canvas) {
             save()
-            move2Center()
             rotate(180.0f)
             for (degrees in 0..50) {
                 if (degrees < 26) {
@@ -276,7 +248,7 @@ class DashboardView @JvmOverloads constructor(
     }
 
     private fun drawScoreText(canvas: Canvas) {
-        var textColor = if (score < 51) {
+        val textColor = if (score < 51) {
             mArgbEvaluator.evaluate(
                 score * 0.02f,
                 mStartColor,
@@ -302,12 +274,9 @@ class DashboardView @JvmOverloads constructor(
         }
         val scoreX = scoreWidth * xOffset
         val scoreUnitX = scoreWidth * (1 + xOffset)
-        canvas.apply {
-            save()
-            move2Center()
+        with(canvas) {
             drawText(scoreText, scoreX, y, mScorePaint)
             drawText(scoreUnitText, scoreUnitX, y, mScoreUnitPaint)
-            restore()
         }
     }
 
@@ -350,9 +319,7 @@ class DashboardView @JvmOverloads constructor(
     }
 
     private fun drawOuterDesText(canvas: Canvas) {
-        canvas.apply {
-            save()
-            move2Center()
+        with(canvas) {
             mOuterDesPaint.color = mDesColor1
             drawText(mDesStr1, mDesPoint1.x, mDesPoint1.y, mOuterDesPaint)
 
@@ -367,14 +334,12 @@ class DashboardView @JvmOverloads constructor(
 
             mOuterDesPaint.color = mDesColor5
             drawText(mDesStr5, mDesPoint5.x, mDesPoint5.y, mOuterDesPaint)
-            restore()
         }
     }
 
     private fun drawPointer(canvas: Canvas) {
-        canvas.apply {
+        with(canvas) {
             save()
-            move2Center()
             rotate(score.toFloat() * 0.01f * 180)
             drawPath(mPointerPath, mPointerPaint)
             restore()
