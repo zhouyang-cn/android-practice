@@ -105,7 +105,6 @@ class BarChatView @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
         val heightMode = MeasureSpec.getMode(heightMeasureSpec)
         val height = if (heightMode == MeasureSpec.EXACTLY || heightMode == MeasureSpec.UNSPECIFIED) {
             MeasureSpec.getSize(heightMeasureSpec)
@@ -191,7 +190,7 @@ class BarChatView @JvmOverloads constructor(
             maxBarData?.let {
                 // 绘制柱
                 val barY =
-                    if (value == 0) {
+                    if (value <= 0) {
                         -1.0f + barBottomY
                     } else {
                         -1.0f * highestBarHeight * (value.toFloat() / it) + barBottomY
