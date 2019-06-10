@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         fab.setOnClickListener {
             dashboardView.setScoreValue(75)
-            barChartView.setData(100)
+            // 给柱状图设置数据
+            barChartView.setData(listOf(5, 10, 15, 20, 60, 18, 10, 2))
         }
 
         val toggle = ActionBarDrawerToggle(

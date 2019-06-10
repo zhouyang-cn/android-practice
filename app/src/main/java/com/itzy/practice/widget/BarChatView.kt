@@ -8,6 +8,7 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.animation.addListener
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.sp
 
@@ -21,12 +22,14 @@ class BarChatView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
 
-    private var mBarWidth: Float = 0f
-    private var barHeight = 0
+    private var isBarValueShown = false
+    private var maxBarData: Int? = 0
+    private var highestBarHeight = 0f
         set(value) {
             field = value
             invalidate()
         }
+    private var mBarWidth: Float = 0f
 
     private val greenColor = Color.parseColor("#3DBC9B")
     private val redColor = Color.parseColor("#FF4747")
@@ -55,6 +58,12 @@ class BarChatView @JvmOverloads constructor(
         color = redColor
     }
 
+    private val mRangTextPaint = Paint().apply {
+        isAntiAlias = true
+        color = Color.parseColor("#999999")
+        textSize = sp(8f).toFloat()
+    }
+
     // 底部下跌和上涨文字高度
     private var dropTextHeight = 0f
 
@@ -73,11 +82,12 @@ class BarChatView @JvmOverloads constructor(
 
     private var horizontalBarBottomY = 0f
     private var horizontalBarTopY = 0f
-    private val data = listOf(5, 10, 15, 20, 60, 18, 10, 2)
+    private var mData = listOf(0, 0, 0, 0, 0, 0, 0, 0)
 
     private var barBottomY = 0f
+    private var mRangeTextBottomY = 0f
 
-    private val rangTextList = listOf(
+    private val rangeTextList = listOf(
         "<-10", "-10~-7", "-7~-3", "-3~-0",
         "0~3", "3~7", "7~10", ">10"
     )
@@ -89,25 +99,28 @@ class BarChatView @JvmOverloads constructor(
         dropTextHeight = mGreenTextPaint.fontMetrics.bottom - mGreenTextPaint.fontMetrics.top
         horizontalBarBottomY = (bottomOffset + dropTextHeight + dip(5)) * -1f
         horizontalBarTopY = horizontalBarBottomY - dip(8)
-
+        mRangeTextBottomY = horizontalBarTopY - dip(15)
         barBottomY = horizontalBarTopY - dip(30)
+    }
 
-        for ((index, value) in data.withIndex()) {
-            total += value
-            if (index < 4) {
-                dropTotal += value
-            } else {
-                riseTotal += value
-            }
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
+        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
+        val height = if (heightMode == MeasureSpec.EXACTLY || heightMode == MeasureSpec.UNSPECIFIED) {
+            MeasureSpec.getSize(heightMeasureSpec)
+        } else {
+            dip(200)
         }
+        setMeasuredDimension(width, height)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        initBarWidth()
+        initBar()
     }
 
-    private fun initBarWidth() {
+    private fun initBar() {
         // 一共8个柱，start和end不要间距，相邻两个柱的间距为15dp
         mBarWidth = (width - 7 * dip(15)) / 8f
         mGreenBarPaint.strokeWidth = mBarWidth
@@ -115,6 +128,7 @@ class BarChatView @JvmOverloads constructor(
 
         dropWidth = width / 2f
         riseWidth = width / 2f
+        highestBarHeight = height + barBottomY + dip(-30)
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -130,12 +144,14 @@ class BarChatView @JvmOverloads constructor(
     }
 
     private fun drawDropAndRiseAmount(canvas: Canvas) {
-        val dropAmount = "下跌: $dropTotal"
-        val riseAmount = "上涨: $riseTotal"
-        val textWidth = mGreenTextPaint.measureText(riseAmount)
-        with(canvas) {
-            drawText(dropAmount, 0f, -bottomOffset, mGreenTextPaint)
-            drawText(riseAmount, width - textWidth, -bottomOffset, mRedTextPaint)
+        if (isBarValueShown) {
+            val dropAmount = "下跌: $dropTotal"
+            val riseAmount = "上涨: $riseTotal"
+            val textWidth = mGreenTextPaint.measureText(riseAmount)
+            with(canvas) {
+                drawText(dropAmount, 0f, -bottomOffset, mGreenTextPaint)
+                drawText(riseAmount, width - textWidth, -bottomOffset, mRedTextPaint)
+            }
         }
     }
 
@@ -166,19 +182,48 @@ class BarChatView @JvmOverloads constructor(
     }
 
     private fun drawBar(canvas: Canvas) {
-        for ((index, value) in data.withIndex()) {
-            val x = if (index != 0) {
+        for ((index, value) in mData.withIndex()) {
+            val barX = if (index != 0) {
                 (mBarWidth + dip(15)) * index + mBarWidth / 2
             } else {
                 mBarWidth / 2
             }
-            canvas.drawLine(
-                x,
-                barBottomY,
-                x,
-                -1 * barHeight + barBottomY,
-                if (index < 4) mGreenBarPaint else mRedBarPaint
-            )
+            maxBarData?.let {
+                // 绘制柱
+                val barY =
+                    if (value == 0) {
+                        -1.0f + barBottomY
+                    } else {
+                        -1.0f * highestBarHeight * (value.toFloat() / it) + barBottomY
+                    }
+                canvas.drawLine(
+                    barX,
+                    barBottomY,
+                    barX,
+                    barY,
+                    if (index < 4) mGreenBarPaint else mRedBarPaint
+                )
+                if (isBarValueShown) {
+                    // 绘制柱顶部的文字
+                    val barTopText = mData[index].toString()
+                    val textPaint = if (index < 4) mGreenTextPaint else mRedTextPaint
+                    val barTopTextWidth = textPaint.measureText(barTopText)
+                    val barTopTextX = barX - barTopTextWidth / 2f
+                    canvas.drawText(
+                        barTopText,
+                        barTopTextX,
+                        barY - dip(5),
+                        textPaint
+                    )
+                }
+            }
+            // 绘制区间文字
+            val rangeText = rangeTextList[index]
+            val rangeTextWidth = mRangTextPaint.measureText(rangeText)
+            val rangeTextX = barX - rangeTextWidth / 2f
+            canvas.drawText(rangeText, rangeTextX, mRangeTextBottomY, mRangTextPaint)
+
+
         }
 
     }
@@ -190,18 +235,32 @@ class BarChatView @JvmOverloads constructor(
         translate(0f, height.toFloat())
     }
 
-    fun setData(barHeight: Int) {
-        val animator = ObjectAnimator.ofInt(
+    fun setData(data: List<Int>) {
+        mData = data
+        maxBarData = mData.max()
+        total = 0
+        dropTotal = 0
+        riseTotal = 0
+        isBarValueShown = false
+        for ((index, value) in mData.withIndex()) {
+            total += value
+            if (index < 4) {
+                dropTotal += value
+            } else {
+                riseTotal += value
+            }
+        }
+        val animator = ObjectAnimator.ofFloat(
             this,
-            "barHeight",
-            0,
-            barHeight
+            "highestBarHeight",
+            0f,
+            highestBarHeight
         ).setDuration(1200)
+        animator.addListener(onEnd = {
+            isBarValueShown = true
+        })
         animator.start()
         val dropWidth = width * (dropTotal.toFloat() / total)
-        println("=== total = $total")
-        println("=== dropTotal = $dropTotal")
-        println("=== dropWidth = $dropWidth")
         val animatorDropBar = ObjectAnimator.ofFloat(
             this,
             "dropWidth",
@@ -210,7 +269,6 @@ class BarChatView @JvmOverloads constructor(
         ).setDuration(1200)
         animatorDropBar.start()
         val riseWidth = width - dropWidth
-        println("=== riseWidth = $riseWidth")
         val animatorRiseBar = ObjectAnimator.ofFloat(
             this,
             "riseWidth",
