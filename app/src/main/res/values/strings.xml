@@ -6,4 +6,12 @@
     <string name="nav_header_subtitle">www.itzhouyang.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <string name="catalog_fragment">Catalog fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="catalog">目录</string>
+    <string name="custom_views">自定义View</string>
+    <string name="open_source_library">开源库</string>
 </resources>

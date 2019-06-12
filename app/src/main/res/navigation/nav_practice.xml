@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_practice"
+    app:startDestination="@id/catalogFragment">
+
+    <fragment
+        android:id="@+id/catalogFragment"
+        android:name="com.itzy.practice.CatalogFragment"
+        android:label="@string/catalog"
+        tools:layout="@layout/fragment_catalog">
+        <action
+            android:id="@+id/action_catalogFragment_to_customViewsFragment"
+            app:destination="@id/customViewsFragment" />
+        <action
+            android:id="@+id/action_catalogFragment_to_openSourceLibsFragment"
+            app:destination="@id/openSourceLibsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customViewsFragment"
+        android:name="com.itzy.practice.CustomViewsFragment"
+        android:label="@string/custom_views"
+        tools:layout="@layout/fragment_custom_views" />
+    <fragment
+        android:id="@+id/openSourceLibsFragment"
+        android:name="com.itzy.practice.OpenSourceLibsFragment"
+        android:label="@string/open_source_library"
+        tools:layout="@layout/fragment_open_source_libs" >
+        <action
+            android:id="@+id/action_openSourceLibsFragment_to_flycoTabLayoutFragment"
+            app:destination="@id/flycoTabLayoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/flycoTabLayoutFragment"
+        android:name="com.itzy.practice.FlycoTabLayoutFragment"
+        android:label="fragment_flyco_tab_layout"
+        tools:layout="@layout/fragment_flyco_tab_layout" />
+</navigation>
