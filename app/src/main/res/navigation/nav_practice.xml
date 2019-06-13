@@ -19,21 +19,13 @@
     </fragment>
     <fragment
         android:id="@+id/customViewsFragment"
-        android:name="com.itzy.practice.CustomViewsFragment"
+        android:name="com.itzy.practice.custom.CustomViewsFragment"
         android:label="@string/custom_views"
         tools:layout="@layout/fragment_custom_views" />
     <fragment
         android:id="@+id/openSourceLibsFragment"
-        android:name="com.itzy.practice.OpenSourceLibsFragment"
+        android:name="com.itzy.practice.opensource.OpenSourceLibsFragment"
         android:label="@string/open_source_library"
-        tools:layout="@layout/fragment_open_source_libs" >
-        <action
-            android:id="@+id/action_openSourceLibsFragment_to_flycoTabLayoutFragment"
-            app:destination="@id/flycoTabLayoutFragment" />
+        tools:layout="@layout/fragment_open_source_libs">
     </fragment>
-    <fragment
-        android:id="@+id/flycoTabLayoutFragment"
-        android:name="com.itzy.practice.FlycoTabLayoutFragment"
-        android:label="fragment_flyco_tab_layout"
-        tools:layout="@layout/fragment_flyco_tab_layout" />
 </navigation>

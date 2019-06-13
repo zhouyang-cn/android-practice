@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OpenSourceLibsFragment">
+    tools:context=".opensource.OpenSourceLibsFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
@@ -17,11 +17,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvFlycoTabLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="FlycoTabLayout" />
+            android:text="Hello" />
     </androidx.cardview.widget.CardView>
 
 

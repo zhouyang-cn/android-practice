@@ -1,4 +1,4 @@
-package com.itzy.practice
+package com.itzy.practice.custom
 
 
 import android.os.Bundle
@@ -6,20 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.itzy.practice.R
 
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class FlycoTabLayoutFragment : Fragment() {
+class CustomViewsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+//        dashboardView.setScoreValue(75)
+//        barChartView.setData(listOf(5, 10, 15, 20, 60, 18, 10, 2))
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_flyco_tab_layout, container, false)
+        return inflater.inflate(R.layout.fragment_custom_views, container, false)
     }
 
 
