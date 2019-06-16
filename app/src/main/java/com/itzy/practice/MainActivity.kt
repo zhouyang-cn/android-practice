@@ -1,15 +1,21 @@
 package com.itzy.practice
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +29,13 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(navController.graph, drawer_layout)
         toolbar.setupWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
+        val headerView = nav_view.inflateHeaderView(R.layout.nav_header_main)
+        headerView.findViewById<ImageView>(R.id.iv_avatar).setOnClickListener {
+            val url = "https://www.itzhouyang.com/about"
+            CustomTabsIntent.Builder().apply {
+                setToolbarColor(ContextCompat.getColor(this@MainActivity, R.color.colorPrimary))
+            }.build().launchUrl(this, Uri.parse(url))
+        }
     }
 
     override fun onBackPressed() {
