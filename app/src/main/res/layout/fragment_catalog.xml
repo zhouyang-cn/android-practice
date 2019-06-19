@@ -15,52 +15,7 @@
             android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-                app:contentPadding="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <TextView
-                        android:text="2019/06/17"
-                        android:textColor="#333"
-                        android:textSize="16sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                <TextView
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="35dp"
-                        android:lineSpacingMultiplier="1.2"
-                        android:text="1. 实现仪表盘自定义View\n2. 实现柱状图自定义View"
-                        android:textColor="#333"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                <Button
-                        android:id="@+id/btn_20190617"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="35dp"
-                        android:lineSpacingMultiplier="1.2"
-                        android:text="View Demo"
-                        android:textAllCaps="false"
-                        android:textColor="#333"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCoordinatorLayout"
                 app:contentPadding="10dp"
                 android:layout_margin="15dp"
                 android:layout_width="match_parent"
@@ -72,7 +27,7 @@
                     android:layout_height="wrap_content">
 
                 <TextView
-                        android:text="2019/06/16"
+                        android:text="#cardCoordinatorLayout"
                         android:textColor="#333"
                         android:textSize="16sp"
                         android:layout_width="wrap_content"
@@ -80,21 +35,9 @@
 
                 <TextView
                         android:layout_marginTop="8dp"
-                        android:layout_marginStart="35dp"
+                        android:layout_marginStart="15dp"
                         android:lineSpacingMultiplier="1.2"
-                        android:text="1. 实现仪表盘自定义View\n2. 实现柱状图自定义View"
-                        android:textColor="#333"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                <Button
-                        android:id="@+id/btn_20190616"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="35dp"
-                        android:lineSpacingMultiplier="1.2"
-                        android:text="View Demo"
-                        android:textAllCaps="false"
+                        android:text="使用cardCoordinatorLayout实现吸顶效果"
                         android:textColor="#333"
                         android:textSize="14sp"
                         android:layout_width="wrap_content"

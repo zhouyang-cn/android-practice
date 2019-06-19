@@ -26,8 +26,8 @@ class CatalogFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btn_20190616.setOnClickListener {
-            findNavController().navigate(R.id.action_catalogFragment_to_customViewsFragment)
+        cardCoordinatorLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_catalogFragment_to_coordinatorLayoutFragment)
         }
     }
 

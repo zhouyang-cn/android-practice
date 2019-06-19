@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_catalogFragment_to_openSourceLibsFragment"
             app:destination="@id/openSourceLibsFragment" />
+        <action
+            android:id="@+id/action_catalogFragment_to_coordinatorLayoutFragment"
+            app:destination="@id/coordinatorLayoutFragment" />
+        <action
+            android:id="@+id/action_catalogFragment_to_designFragment2"
+            app:destination="@id/designFragment" />
     </fragment>
     <fragment
         android:id="@+id/customViewsFragment"
@@ -28,4 +34,14 @@
         android:label="@string/open_source_library"
         tools:layout="@layout/fragment_open_source_libs">
     </fragment>
+    <fragment
+        android:id="@+id/coordinatorLayoutFragment"
+        android:name="com.itzy.practice.design.CoordinatorLayoutFragment"
+        android:label="fragment_coordinator_layout"
+        tools:layout="@layout/fragment_coordinator_layout" />
+    <fragment
+        android:id="@+id/designFragment"
+        android:name="com.itzy.practice.design.DesignFragment"
+        android:label="@string/design"
+        tools:layout="@layout/fragment_design" />
 </navigation>
