@@ -1,2 +1,2 @@
 # android-practice
-An Android technology practice application that records knowledge from daily work and study.
+日常工作和学习中用到技术实践项目
