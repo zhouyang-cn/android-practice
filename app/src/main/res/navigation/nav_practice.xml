@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/catalogFragment"
-        android:name="com.itzy.practice.CatalogFragment"
+        android:name="com.itzy.practice.catalog.CatalogFragment"
         android:label="@string/catalog"
         tools:layout="@layout/fragment_catalog">
         <action

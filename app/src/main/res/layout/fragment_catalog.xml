@@ -1,53 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:scrollbars="none"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".CatalogFragment">
-
-    <LinearLayout
-            android:paddingBottom="15dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardCoordinatorLayout"
-                app:contentPadding="10dp"
-                android:layout_margin="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <TextView
-                        android:text="#cardCoordinatorLayout"
-                        android:textColor="#333"
-                        android:textSize="16sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                <TextView
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="15dp"
-                        android:lineSpacingMultiplier="1.2"
-                        android:text="使用cardCoordinatorLayout实现吸顶效果"
-                        android:textColor="#333"
-                        android:textSize="14sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-
-</ScrollView>
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="8dp"
+    tools:context=".catalog.CatalogFragment"
+    tools:itemCount="5"
+    tools:listitem="@layout/item_catalog" />
