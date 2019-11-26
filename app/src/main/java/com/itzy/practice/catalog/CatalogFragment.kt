@@ -10,13 +10,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.itzy.practice.R
 import com.itzy.practice.vo.CatalogVo
 import kotlinx.android.synthetic.main.fragment_catalog.*
+
 class CatalogFragment : Fragment() {
 
     private val mList = listOf(
         CatalogVo(
-         "cardCoordinatorLayout",
-         "使用cardCoordinatorLayout实现吸顶效果",
+            "吸顶效果",
+            "使用CoordinatorLayout + AppBarLayout + NestedScrollView快速实现吸顶效果",
             R.id.action_catalogFragment_to_coordinatorLayoutFragment
+        ),
+        CatalogVo(
+            "京东金融会员权益效果",
+            "使用LinearSnapHelper + LinearLayoutManager + 自定义ItemDecoration来实现此效果",
+            R.id.action_catalogFragment_to_snapHelperFragment
         )
     )
 

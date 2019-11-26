@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_catalogFragment_to_designFragment2"
             app:destination="@id/designFragment" />
+        <action
+            android:id="@+id/action_catalogFragment_to_snapHelperFragment"
+            app:destination="@id/snapHelperFragment" />
     </fragment>
     <fragment
         android:id="@+id/customViewsFragment"
@@ -36,12 +39,17 @@
     </fragment>
     <fragment
         android:id="@+id/coordinatorLayoutFragment"
-        android:name="com.itzy.practice.design.CoordinatorLayoutFragment"
-        android:label="fragment_coordinator_layout"
+        android:name="com.itzy.practice.design.ceiling.CoordinatorLayoutFragment"
+        android:label="吸顶效果"
         tools:layout="@layout/fragment_coordinator_layout" />
     <fragment
         android:id="@+id/designFragment"
         android:name="com.itzy.practice.design.DesignFragment"
         android:label="@string/design"
         tools:layout="@layout/fragment_design" />
+    <fragment
+        android:id="@+id/snapHelperFragment"
+        android:name="com.itzy.practice.design.viprights.SnapHelperFragment"
+        android:label="京东金融会员权益"
+        tools:layout="@layout/fragment_snap_helper" />
 </navigation>
