@@ -64,8 +64,11 @@
             android:id="@+id/action_motionLayoutFragment_to_motionTextFragment"
             app:destination="@id/motionTextFragment" />
         <action
-            android:id="@+id/action_explore_motion_layout_part1"
-            app:destination="@id/exploreMotionLayoutPart1Fragment" />
+            android:id="@+id/action_motion_layout_part1_demo1"
+            app:destination="@id/motionLayoutPart1Fragment" />
+        <action
+            android:id="@+id/action_motion_layout_part1_demo2"
+            app:destination="@id/motionLayoutPart1Demo2Fragment" />
     </fragment>
     <fragment
         android:id="@+id/motionTextFragment"
@@ -73,8 +76,13 @@
         android:label="Motion Text"
         tools:layout="@layout/fragment_motion_text" />
     <fragment
-        android:id="@+id/exploreMotionLayoutPart1Fragment"
-        android:name="com.itzy.practice.ui.motionlayout.ExploreMotionLayoutPart1Fragment"
+        android:id="@+id/motionLayoutPart1Fragment"
+        android:name="com.itzy.practice.ui.motionlayout.MotionLayoutPart1Demo1Fragment"
         android:label="MotionLayout探索Part1"
-        tools:layout="@layout/fragment_explore_motion_layout_part1" />
+        tools:layout="@layout/fragment_motion_layout_part1_demo1" />
+    <fragment
+        android:id="@+id/motionLayoutPart1Demo2Fragment"
+        android:name="com.itzy.practice.MotionLayoutPart1Demo2Fragment"
+        android:label="fragment_motion_layout_part1_demo2"
+        tools:layout="@layout/fragment_motion_layout_part1_demo2" />
 </navigation>

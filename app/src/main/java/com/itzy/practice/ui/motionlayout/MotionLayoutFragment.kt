@@ -26,7 +26,10 @@ class MotionLayoutFragment : Fragment() {
             findNavController().navigate(R.id.action_motionLayoutFragment_to_motionTextFragment)
         }
         button1.setOnClickListener {
-            findNavController().navigate(R.id.action_explore_motion_layout_part1)
+            findNavController().navigate(R.id.action_motion_layout_part1_demo1)
+        }
+        button2.setOnClickListener {
+            findNavController().navigate(R.id.action_motion_layout_part1_demo2)
         }
     }
 

@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:motionDebug="SHOW_ALL"
-    app:layoutDescription="@xml/fragment_explore_motion_layout_part1_scene"
-    tools:context=".ui.motionlayout.ExploreMotionLayoutPart1Fragment">
+    app:layoutDescription="@xml/fragment_motion_layout_part1_demo1_scene"
+    tools:context=".ui.motionlayout.MotionLayoutPart1Demo1Fragment">
 
     <View
         android:id="@+id/button"
