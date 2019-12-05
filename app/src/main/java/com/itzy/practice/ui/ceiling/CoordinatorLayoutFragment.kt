@@ -1,4 +1,4 @@
-package com.itzy.practice.design.ceiling
+package com.itzy.practice.ui.ceiling
 
 
 import android.os.Bundle

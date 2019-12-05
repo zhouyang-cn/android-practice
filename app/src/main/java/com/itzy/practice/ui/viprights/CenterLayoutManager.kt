@@ -1,4 +1,4 @@
-package com.itzy.practice.design.viprights
+package com.itzy.practice.ui.viprights
 
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="2000">
+        <KeyFrameSet>
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv1"
+                motion:percentX="0.2"
+                motion:percentY="0.4" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv2"
+                motion:percentX="0.694"
+                motion:percentY="0.405" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv3"
+                motion:percentX="0.8"
+                motion:percentY="0.4" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv4"
+                motion:percentX="0.35"
+                motion:percentY="0.4" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv5"
+                motion:percentX="0.4"
+                motion:percentY="0.4" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv6"
+                motion:percentX="0.45"
+                motion:percentY="0.4" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv7"
+                motion:percentX="0.55"
+                motion:percentY="0.6" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv8"
+                motion:percentX="0.6"
+                motion:percentY="0.6" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv9"
+                motion:percentX="0.65"
+                motion:percentY="0.6" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv10"
+                motion:percentX="0.25"
+                motion:percentY="0.6" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv11"
+                motion:percentX="0.75"
+                motion:percentY="0.6" />
+            <KeyPosition
+                motion:framePosition="75"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/tv12"
+                motion:percentX="0.3"
+                motion:percentY="0.6" />
+        </KeyFrameSet>
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@id/tv1"
+            motion:touchAnchorSide="top" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/tv1">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+        <Constraint android:id="@+id/tv2">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+        <Constraint android:id="@+id/tv3">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+        <Constraint android:id="@+id/tv4">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+        <Constraint android:id="@+id/tv5">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+        <Constraint android:id="@+id/tv6">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.9"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.7">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.9"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.75">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.9"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.8">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.9"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.85">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.9"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.9">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.9"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.95">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_333333" />
+        </Constraint>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.2"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_1de9b6" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.7"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_f44336" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.8"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_9c27b0" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.35"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_795548" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.4"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_4caf50" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.45"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5">
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="@color/c_cddc39" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/tv9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.65"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5" />
+        <Constraint
+            android:id="@+id/tv7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.55"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5" />
+        <Constraint
+            android:id="@+id/tv8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.6"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5" />
+        <Constraint
+            android:id="@+id/tv10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.25"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5" />
+        <Constraint
+            android:id="@+id/tv11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.75"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5" />
+        <Constraint
+            android:id="@+id/tv12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.3"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintVertical_bias="0.5" />
+    </ConstraintSet>
+</MotionScene>

@@ -1,4 +1,4 @@
-package com.itzy.practice.catalog
+package com.itzy.practice.home
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.itzy.practice.R
 import com.itzy.practice.vo.CatalogVo
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_catalog.*
+import kotlinx.android.synthetic.main.item_home.*
 
-class CatalogAdapter(
+class HomeAdapter(
     private val list: List<CatalogVo>
-) : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     inner class ViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView),
@@ -29,7 +29,7 @@ class CatalogAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_catalog, parent, false)
+            .inflate(R.layout.item_home, parent, false)
         return ViewHolder(view)
     }
 

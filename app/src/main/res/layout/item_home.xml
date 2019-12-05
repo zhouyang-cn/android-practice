@@ -10,7 +10,7 @@
     android:layout_marginBottom="8dp"
     app:cardElevation="3dp"
     app:contentPadding="10dp"
-    tools:showIn="@layout/fragment_catalog">
+    tools:showIn="@layout/fragment_home">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

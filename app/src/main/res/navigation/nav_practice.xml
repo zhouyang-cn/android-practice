@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_practice"
-    app:startDestination="@id/catalogFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/catalogFragment"
-        android:name="com.itzy.practice.catalog.CatalogFragment"
-        android:label="@string/catalog"
-        tools:layout="@layout/fragment_catalog">
+        android:id="@+id/homeFragment"
+        android:name="com.itzy.practice.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_catalogFragment_to_customViewsFragment"
             app:destination="@id/customViewsFragment" />
@@ -21,10 +21,13 @@
             app:destination="@id/coordinatorLayoutFragment" />
         <action
             android:id="@+id/action_catalogFragment_to_designFragment2"
-            app:destination="@id/designFragment" />
+            app:destination="@id/uiFragment" />
         <action
             android:id="@+id/action_catalogFragment_to_snapHelperFragment"
             app:destination="@id/snapHelperFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_motionLayoutFragment"
+            app:destination="@id/motionLayoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/customViewsFragment"
@@ -39,17 +42,39 @@
     </fragment>
     <fragment
         android:id="@+id/coordinatorLayoutFragment"
-        android:name="com.itzy.practice.design.ceiling.CoordinatorLayoutFragment"
+        android:name="com.itzy.practice.ui.ceiling.CoordinatorLayoutFragment"
         android:label="吸顶效果"
         tools:layout="@layout/fragment_coordinator_layout" />
     <fragment
-        android:id="@+id/designFragment"
-        android:name="com.itzy.practice.design.DesignFragment"
-        android:label="@string/design"
-        tools:layout="@layout/fragment_design" />
+        android:id="@+id/uiFragment"
+        android:name="com.itzy.practice.ui.DesignFragment"
+        android:label="@string/ui"
+        tools:layout="@layout/fragment_ui" />
     <fragment
         android:id="@+id/snapHelperFragment"
-        android:name="com.itzy.practice.design.viprights.SnapHelperFragment"
+        android:name="com.itzy.practice.ui.viprights.SnapHelperFragment"
         android:label="京东金融会员权益"
         tools:layout="@layout/fragment_snap_helper" />
+    <fragment
+        android:id="@+id/motionLayoutFragment"
+        android:name="com.itzy.practice.ui.motionlayout.MotionLayoutFragment"
+        android:label="MotionLayout"
+        tools:layout="@layout/fragment_motion_layout">
+        <action
+            android:id="@+id/action_motionLayoutFragment_to_motionTextFragment"
+            app:destination="@id/motionTextFragment" />
+        <action
+            android:id="@+id/action_explore_motion_layout_part1"
+            app:destination="@id/exploreMotionLayoutPart1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/motionTextFragment"
+        android:name="com.itzy.practice.ui.motionlayout.MotionTextFragment"
+        android:label="Motion Text"
+        tools:layout="@layout/fragment_motion_text" />
+    <fragment
+        android:id="@+id/exploreMotionLayoutPart1Fragment"
+        android:name="com.itzy.practice.ui.motionlayout.ExploreMotionLayoutPart1Fragment"
+        android:label="MotionLayout探索Part1"
+        tools:layout="@layout/fragment_explore_motion_layout_part1" />
 </navigation>

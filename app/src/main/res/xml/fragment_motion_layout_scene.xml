@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/btnTransition"
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetEnd="@+id/buttonCenter"
+        motion:constraintSetStart="@+id/btnTop"
+        motion:motionInterpolator="bounce"
+        motion:duration="500"/>
+
+    <Transition
+        android:id="@+id/fabTransition"
+        motion:constraintSetEnd="@+id/fabExpanded"
+        motion:constraintSetStart="@id/buttonCenter"
+        motion:duration="500">
+        <OnClick
+            motion:clickAction="toggle"
+            motion:targetId="@id/fab" />
+        <KeyFrameSet>
+            <KeyPosition
+                motion:framePosition="50"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/button1"
+                motion:percentX="0.65" />
+            <KeyPosition
+                motion:framePosition="50"
+                motion:keyPositionType="parentRelative"
+                motion:motionTarget="@+id/button2"
+                motion:percentX="0.65" />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/buttonCenter">
+        <Constraint
+            android:id="@+id/btnMotionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/fabExpanded">
+        <Constraint
+            android:id="@+id/button1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="50dp"
+            android:alpha="1"
+            android:scaleX="1.0"
+            android:scaleY="1.0"
+            motion:layout_constraintBottom_toTopOf="@+id/fab"
+            motion:layout_constraintEnd_toEndOf="@+id/fab"
+            motion:layout_constraintStart_toStartOf="@+id/fab" />
+        <Constraint
+            android:id="@+id/button2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="50dp"
+            android:alpha="1"
+            android:scaleX="1.0"
+            android:scaleY="1.0"
+            motion:layout_constraintBottom_toTopOf="@+id/button1"
+            motion:layout_constraintEnd_toEndOf="@+id/fab"
+            motion:layout_constraintStart_toStartOf="@+id/fab" />
+        <Constraint
+            android:id="@+id/btnMotionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/btnTop" />
+</MotionScene>

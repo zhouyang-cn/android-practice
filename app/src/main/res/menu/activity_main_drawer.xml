@@ -5,11 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/catalogFragment"
-            android:title="@string/catalog" />
+            android:id="@+id/homeFragment"
+            android:title="@string/home" />
         <item
-            android:id="@+id/designFragment"
-            android:title="@string/design" />
+            android:id="@+id/uiFragment"
+            android:title="@string/ui" />
         <item
             android:id="@+id/customViewsFragment"
             android:title="@string/custom_views" />

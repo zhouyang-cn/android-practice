@@ -1,4 +1,4 @@
-package com.itzy.practice.design.viprights
+package com.itzy.practice.ui.viprights
 
 import android.graphics.Color
 import android.view.LayoutInflater

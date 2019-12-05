@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/fragment_motion_layout_scene"
+    tools:context=".ui.motionlayout.MotionLayoutFragment">
+
+    <Button
+        android:id="@+id/btnMotionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Motion Text"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/button2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:alpha="0"
+        android:elevation="7dp"
+        android:scaleType="centerCrop"
+        android:scaleX="0.1"
+        android:scaleY="0.1"
+        android:src="@drawable/ic_beauty1"
+        app:layout_constraintBottom_toBottomOf="@+id/fab"
+        app:layout_constraintEnd_toEndOf="@+id/fab"
+        app:layout_constraintStart_toStartOf="@+id/fab"
+        app:layout_constraintTop_toTopOf="@+id/fab"
+        app:roundPercent="1" />
+
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/button1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:alpha="0"
+        android:elevation="7dp"
+        android:scaleType="centerCrop"
+        android:scaleX="0.1"
+        android:scaleY="0.1"
+        android:src="@drawable/ic_beauty2"
+        app:layout_constraintBottom_toBottomOf="@+id/fab"
+        app:layout_constraintEnd_toEndOf="@+id/fab"
+        app:layout_constraintStart_toStartOf="@+id/fab"
+        app:layout_constraintTop_toTopOf="@+id/fab"
+        app:roundPercent="1" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
+        android:id="@+id/fab"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorAccent"
+        android:elevation="7dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_white_share"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:roundPercent="1" />
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
