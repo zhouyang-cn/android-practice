@@ -5,6 +5,10 @@
 
 > 为了避免界面加载缓慢，请点击查看GIF观看对应的UI效果
 
+### MotionLayout
+
+- [MotionLayout探索(part Ⅰ)](https://www.itzhouyang.com/post/explore_motion_layout_part1.html)
+
 ### 吸顶效果
 
 使用CoordinatorLayout + AppBarLayout + NestedScrollView快速实现吸顶效果
